@@ -97,8 +97,28 @@ public class ContaService {
             throw new RegraDeNegocioException("Conta não pode ser encerrada pois ainda possui saldo!");
         }
         
-        Connection conn = connection.recuperarConexao();
+        Boolean ativa = false;
         
+        Connection conn = connection.recuperarConexao();
+        new ContaDAO(conn).alterarLogico(numeroConta, ativa);
+    }
+    
+    public void ativarConta(Integer numeroConta) {
+    	var conta = buscaContaPorNumeroNoBanco(numeroConta);
+        
+    	if(conta == null) {
+    		throw new RuntimeException("Conta não encontrada no banco de dados");
+    	}
+    	
+    	if (conta.getAtiva()) {
+            throw new RegraDeNegocioException("Conta já está ativa!");
+        }
+        
+        
+        Boolean ativa = true;
+        
+        Connection conn = connection.recuperarConexao();
+        new ContaDAO(conn).alterarLogico(numeroConta, ativa);
     }
 
     private Conta buscarContaPorNumero(Integer numero) {

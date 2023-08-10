@@ -50,7 +50,7 @@ public class ContaDAO {
 		ResultSet rs;
 		Set<Conta> contas = new HashSet<>();
 		
-		String sql = "SELECT * FROM conta WHERE ativa = true";
+		String sql = "SELECT * FROM conta";
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -86,7 +86,7 @@ public class ContaDAO {
 		PreparedStatement ps;
 		ResultSet rs;
 		Conta conta = null;
-		String sql = "SELECT * FROM conta WHERE numero = ? and ativa = true";
+		String sql = "SELECT * FROM conta WHERE numero = ?";
 		
 		try {
 			ps = conn.prepareStatement(sql);
@@ -162,13 +162,14 @@ public class ContaDAO {
 		}
 	}
 	
-	public void alterarLogico(Integer numeroConta) {
+	public void alterarLogico(Integer numeroConta, Boolean ativa) {
 		PreparedStatement ps;
-		String sql = "UPDATE conta SET ativa = false WHERE numero = ?";
+		String sql = "UPDATE conta SET ativa = ? WHERE numero = ?";
 		
 		try {
 			ps = conn.prepareStatement(sql);
-			ps.setInt(1, numeroConta);
+			ps.setBoolean(1, ativa);
+			ps.setInt(2, numeroConta);
 			
 			ps.execute();
 			

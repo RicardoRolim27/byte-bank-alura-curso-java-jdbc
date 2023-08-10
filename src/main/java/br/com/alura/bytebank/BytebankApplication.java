@@ -14,7 +14,7 @@ public class BytebankApplication {
 
     public static void main(String[] args) {
         var opcao = exibirMenu();
-        while (opcao != 9) {
+        while (opcao != 10) {
             try {
                 switch (opcao) {
                     case 1:
@@ -30,15 +30,18 @@ public class BytebankApplication {
                         encerrarConta();
                         break;
                     case 5:
+                        ativarConta();
+                        break;    
+                    case 6:
                         consultarSaldo();
                         break;
-                    case 6:
+                    case 7:
                         realizarSaque();
                         break;
-                    case 7:
+                    case 8:
                         realizarDeposito();
                         break;
-                    case 8:
+                    case 9:
                         realizarTransferencia();
                         break;    
                 }
@@ -60,11 +63,12 @@ public class BytebankApplication {
                 2 - Consulta uma conta
                 3 - Abertura de conta
                 4 - Encerramento de conta
-                5 - Consultar saldo de uma conta
-                6 - Realizar saque em uma conta
-                7 - Realizar depósito em uma conta
-                8 - Realizar Transferência
-                9 - Sair
+                5 - Ativar conta inativada
+                6 - Consultar saldo de uma conta
+                7 - Realizar saque em uma conta
+                8 - Realizar depósito em uma conta
+                9 - Realizar Transferência
+                10 - Sair
                 """);
         return teclado.nextInt();
     }
@@ -118,6 +122,17 @@ public class BytebankApplication {
         service.encerrarLogico(numeroDaConta);
 
         System.out.println("Conta encerrada com sucesso!");
+        System.out.println("Pressione qualquer tecla e de ENTER para voltar ao menu principal");
+        teclado.next();
+    }
+    
+    private static void ativarConta() {
+        System.out.println("Digite o número da conta:");
+        var numeroDaConta = teclado.nextInt();
+
+        service.ativarConta(numeroDaConta);
+
+        System.out.println("Conta ativada com sucesso!");
         System.out.println("Pressione qualquer tecla e de ENTER para voltar ao menu principal");
         teclado.next();
     }

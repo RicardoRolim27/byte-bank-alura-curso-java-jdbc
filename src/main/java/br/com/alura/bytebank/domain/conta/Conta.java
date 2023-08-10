@@ -45,13 +45,9 @@ public class Conta {
     }
 
     @Override
-    public String toString() {
-        return "Conta{" +
-                "numero='" + numero + '\'' +
-                ", saldo=" + saldo +
-                ", titular=" + titular +
-                '}';
-    }
+	public String toString() {
+		return "Conta [numero=" + numero + ", saldo=" + saldo + ", titular=" + titular + ", ativa=" + ativa + "]";
+	}
 
     public Integer getNumero() {
         return numero;
